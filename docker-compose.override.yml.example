@@ -1,8 +1,5 @@
 services:
   api:
-    volumes:
-    - type: bind
-      # CRITICAL FIX: The source path now correctly points to the 'utils/docker' subdirectory
-      source: ./utils/docker/librechat.yaml 
-      # The target path inside the container remains the same
-      target: /app/librechat.yaml
+    environment:
+      # This enables the custom model
+      CUSTOM_MODELS: '[{"name":"Memory Chat RAG","model":"rag-memory-connector","baseURL":"https://site--back-end-api--xwmp2qnnx4rd.code.run/chat","req":{"model":false,"key":"message","endpoint":false},"res":{"key":"response"},"titleConvo":true,"titleModel":"rag-memory-connector","modelDisplayLabel":"Memory RAG","defaultOptions":{"temperature":0.1,"top_p":1.0,"max_tokens":1024}}]'
