@@ -1,8 +1,8 @@
 services:
   api:
-    # This mount tells Docker: "Use the librechat.yaml file I created
-    # in the root folder, and put it inside the container at the expected path."
     volumes:
     - type: bind
-      source: ./librechat.yaml 
+      # CRITICAL FIX: The source path now correctly points to the 'utils/docker' subdirectory
+      source: ./utils/docker/librechat.yaml 
+      # The target path inside the container remains the same
       target: /app/librechat.yaml
