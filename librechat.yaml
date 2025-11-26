@@ -335,34 +335,28 @@ endpoints:
       modelDisplayLabel: 'Portkey'
       iconURL: https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/rjqy7ghvjoiu4cd1xjbf
 
-      # Your Custom RAG Memory Connector Endpoint
-    - name: Memory Chat RAG
-      model: rag-memory-connector
-      # CRITICAL: Replace the placeholder with YOUR live FastAPI URL
-      baseURL: "https://site--back-end-api--xwmp2qnnx4rd.code.run/chat" 
-      
-      # Since your FastAPI service is custom, we must tell LibreChat 
-      # how to format the request body (req) and read the response (res).
+    # Your Custom RAG Memory Connector Endpoint
+    - name: 'memoryRAG'
+      apiKey: 'dummy'
+      baseURL: "https://site--back-end-api--xwmp2qnnx4rd.code.run/chat"
+      directEndpoint: true
+
+      models:
+        default:
+          - "rag-memory-connector"
+        fetch: false
+
+      titleConvo: true
+      titleModel: "rag-memory-connector"
+      modelDisplayLabel: "Memory RAG"
+
       req:
         model: false
-        # We send the user's message using the key 'message'
-        key: message 
+        key: message
         endpoint: false
       res:
-        # We read the final answer from the key 'response'
-        key: response 
-      
-      # Optional: Set display options
-      titleConvo: true
-      titleModel: 'rag-memory-connector'
-      modelDisplayLabel: 'Memory RAG'
-      
-      # Optional: Set default parameters that will appear in the UI
-      defaultOptions:
-        temperature: 0.1 # Low temperature is better for fact retrieval
-        top_p: 1.0
-        max_tokens: 1024
-        
+        key: response
+
 # Example modelSpecs configuration showing grouping options
 # The 'group' field organizes model specs in the UI selector:
 # - If 'group' matches an endpoint name (e.g., "openAI", "groq"), the spec appears nested under that endpoint
